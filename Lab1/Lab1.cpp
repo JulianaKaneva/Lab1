@@ -26,7 +26,7 @@ int check() {
     float number;
     while (true) {
         cin >> number;
-        if (cin.fail() || number <= 0 || cin.peek() != '\n') {
+        if (cin.fail() || number <= 0) {
             cout << "Введите положительное число";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
