@@ -21,13 +21,27 @@ struct ks {
 };
 
 
-// Функция для проверки целочисленного ввода
+// Функция для проверки ввода числа
 int check() {
     float number;
     while (true) {
         cin >> number;
-        if (cin.fail() || number <= 0) {
+        if (cin.fail() || number <= 0 || cin.peek() != '\n') {
             cout << "Введите положительное число";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        else {
+            return number;
+        }
+    }
+}
+int checkWorkShops() {
+    int number;
+    while (true) {
+        cin >> number;
+        if (cin.fail() || number <= 0 || cin.peek() != '\n') {
+            cout << "Введите положительное целое число: ";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
@@ -70,9 +84,9 @@ ks ks_cin() {
     cout << "Название" << endl;
     getline(cin >> ws, K.Name2);
     cout << "Количество цехов" << endl;
-    K.WorkShops = check();
-    cout << "количество цехов в работе " << endl;
-    K.OpenWS = check();
+    K.WorkShops = checkWorkShops();
+    cout << "Количество цехов в работе " << endl;
+    K.OpenWS = checkWorkShops();
     while (true) {
         if (K.OpenWS > K.WorkShops) {
             cout << "Количество цехов в работе превышает общее количество цехов" << endl;
