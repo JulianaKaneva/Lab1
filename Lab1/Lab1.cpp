@@ -7,10 +7,9 @@ using namespace std;
 
 struct truba {
     string Name1;
-    int Dlina = 0;
+    float Dlina = 0;
     float Diametr = 0.0;
     bool Remont = true;
-
 };
 
 struct ks {
@@ -36,6 +35,7 @@ int check() {
         }
     }
 }
+// Функция для проверки целочисленности цехов
 int checkWorkShops() {
     int number;
     while (true) {
@@ -61,7 +61,7 @@ bool checkRemont() {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
         else {
-            return (status == 0);
+            return (status == 1);
         }
     }
 }
@@ -74,13 +74,25 @@ truba truba_cin() {
     T.Dlina = check();
     cout << "Диаметр (мм)" << endl;
     T.Diametr = check();
-    cout << "Статус ремонта (0 - в ремонте, 1 - работает): ";
+    cout << "Статус ремонта: ";
     T.Remont = checkRemont();
     return T;
 }
+
+void truba_redakt(truba& T) {
+    cout << "Текущий статус: " << (T.Remont ? "В ремонте" : "Работает") << endl;
+    T.Remont = checkRemont();
+    cout << "Статус обновлен: " << (T.Remont ? "В ремонте" : "Работает") << endl;
+}
+
+void openWS_redakt(ks& K) {
+    cout << "Сейчас в работе: " << (K.OpenWS) << endl;
+    K.OpenWS = checkWorkShops();
+    cout << "Данные обновлены: " << (K.OpenWS) << endl;
+}
+
 ks ks_cin() {
     ks K;
-
     cout << "Название" << endl;
     getline(cin >> ws, K.Name2);
     cout << "Количество цехов" << endl;
